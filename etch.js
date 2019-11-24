@@ -17,6 +17,9 @@ for (let i=0; i<colorBtns.length; i++) {
     colorBtns[i].style.backgroundColor = colorBtns[i].getAttribute('data-color');
 }
 
+document.querySelector('#indicator1').style.backgroundColor = currentColor1;
+document.querySelector('#indicator2').style.backgroundColor = currentColor2;
+
 function setGridLayout(divsPerSide) {
 
     etchPad.style.gridTemplateColumns = `repeat(${divsPerSide}, 1fr)`;
@@ -68,8 +71,10 @@ function handlePaletteClick(e) {
     console.log(e.button);
     if (e.button == 0) {
         currentColor1 = e.target.getAttribute('data-color');
+        document.querySelector('#indicator1').style.backgroundColor = currentColor1;
     } else if (e.button == 2) {
         currentColor2 = e.target.getAttribute('data-color');
+        document.querySelector('#indicator2').style.backgroundColor = currentColor2;
     }
 }
 

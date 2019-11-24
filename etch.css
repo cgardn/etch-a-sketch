@@ -11,12 +11,13 @@
 
 #page {
     display:grid;
-    grid-template-columns: 01fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 0.5fr 0.5fr 6fr 1fr;
     grid-template-areas:
         ". titleBanner ."
         ". mainButtons ."
         ". pad ."
+        ". indicator ."
         ". botMid ."
 }
 
@@ -66,6 +67,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 20px;
 }
 
 .colorButton {
@@ -76,4 +78,23 @@
     min-width: 40px;
     max-height: 80px;
     min-height: 40px;
+}
+
+#indicatorContainer {
+    grid-area: indicator;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.indicator {
+    height: auto;
+    width: auto;
+    margin: 10px 10px;
+    max-width: 80px;
+    min-width: 40px;
+    max-height: 80px;
+    min-height: 40px;
+    border: 1px solid gray;
 }
