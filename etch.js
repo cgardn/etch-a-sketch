@@ -3,15 +3,17 @@ let currentColor1 = "#000000";
 let currentColor2 = "red";
 let pointer1Down = false;
 let pointer2Down = false;
+let isGridVisible = true;
 
 document.querySelector('#resetButton').addEventListener('click', handleReset);
 document.querySelector('#clearButton').addEventListener('click', clearBoard);
+document.querySelector('#toggleGrid').addEventListener('pointerdown', toggleGrid);
 window.addEventListener('pointerdown', handlePointerDown);
 window.addEventListener('pointerup', handlePointerUp);
 
 let colorBtns = document.querySelectorAll('.colorButton');
 for (let i=0; i<colorBtns.length; i++) {
-    colorBtns[i].addEventListener('click', handlePaletteClick);
+    colorBtns[i].addEventListener('pointerdown', handlePaletteClick);
     colorBtns[i].style.backgroundColor = colorBtns[i].getAttribute('data-color');
 }
 
@@ -20,6 +22,20 @@ function setGridLayout(divsPerSide) {
     etchPad.style.gridTemplateColumns = `repeat(${divsPerSide}, 1fr)`;
     etchPad.style.gridTemplateRows = `repeat(${divsPerSide}, 1fr)`;
     etchPad.style.gridAutoRows = '1fr';
+}
+
+function toggleGrid() {
+//function setGridLines(isVisible) {
+
+    let pixels = document.querySelectorAll('.pixel');
+    pixels.forEach( (pix) => {
+        if (pix.style.border == "hidden") {
+            pix.style.border = "1px dotted rgb(179, 179, 179)";
+        }
+        else {
+            pix.style.border = "hidden";
+        }
+    });
 }
 
 function clearBoard() {
@@ -40,7 +56,7 @@ function deleteBoard() {
 function createBoard(sideCount) {
     for (let i=0; i<(sideCount*sideCount); i++) {
         let thisDiv = document.createElement('div');
-        thisDiv.classList.add('testBorder');
+        thisDiv.classList.add('drawGrid');
         thisDiv.classList.add('pixel');
         thisDiv.addEventListener('mouseenter', handleMouseEnter);
 
@@ -49,6 +65,7 @@ function createBoard(sideCount) {
 }
 
 function handlePaletteClick(e) {
+    console.log(e.button);
     if (e.button == 0) {
         currentColor1 = e.target.getAttribute('data-color');
     } else if (e.button == 2) {

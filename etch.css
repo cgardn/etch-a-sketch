@@ -5,8 +5,8 @@
     width: 100%;
 }
 
-.testBorder {
-    border: 1px solid black;
+.drawGrid {
+    border: 1px dotted rgb(179, 179, 179);
 }
 
 #page {
