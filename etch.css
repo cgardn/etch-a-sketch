@@ -11,16 +11,45 @@
 
 #page {
     display:grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-columns: 01fr 2fr 1fr;
+    grid-template-rows: 0.5fr 0.5fr 6fr 1fr;
     grid-template-areas:
-        ". topMid ."
+        ". titleBanner ."
+        ". mainButtons ."
         ". pad ."
         ". botMid ."
 }
 
 #topMiddle {
     grid-area: topMid;
+}
+
+#titleBanner {
+    grid-area: titleBanner;
+    margin: auto;
+    background-color: paleturquoise;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4em;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#buttonContainer {
+    grid-area: mainButtons;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.topButton {
+    height: auto;
+    width: auto;
+    margin: 0 auto;
+    max-width: 150px;
+    max-height: 120px;
+    align-items: center;
+    font-size: 1.3em;
 }
 
 #etchPad {
