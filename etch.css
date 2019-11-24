@@ -9,6 +9,10 @@
     border: 1px solid black;
 }
 
+.pixel:hover {
+    caret-color: hidden;
+}
+
 #page {
     display:grid;
     grid-template-columns: 01fr 2fr 1fr;

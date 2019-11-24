@@ -1,12 +1,25 @@
 let etchPad = document.querySelector('#etchPad');
+let currentColor = "#000000";
+let pointerDown = false;
 
 document.querySelector('#resetButton').addEventListener('click', handleReset);
+document.querySelector('#clearButton').addEventListener('click', clearBoard);
+window.addEventListener('pointerdown', handlePointerDown);
+window.addEventListener('pointerup', handlePointerUp);
 
 function setGridLayout(divsPerSide) {
 
     etchPad.style.gridTemplateColumns = `repeat(${divsPerSide}, 1fr)`;
     etchPad.style.gridTemplateRows = `repeat(${divsPerSide}, 1fr)`;
     etchPad.style.gridAutoRows = '1fr';
+}
+
+function clearBoard() {
+    const nodeList = document.getElementsByClassName('pixel');
+
+    for (let i=0; i<nodeList.length; i++) {
+        nodeList[i].style.backgroundColor = "#FFFFFF";
+    }
 }
 
 function deleteBoard() {
@@ -23,14 +36,27 @@ function createBoard(sideCount) {
         thisDiv.classList.add('testBorder');
         thisDiv.classList.add('pixel');
         thisDiv.addEventListener('mouseenter', handleMouseEnter);
-    
+
         document.querySelector('#etchPad').appendChild(thisDiv);
     }
 }
+// on pointer down, paint target pixel
+// set flag for pointer down/remove for pointer up
+// check on pointer enter if pointerdown-flag is true, paint if so
+// 
 
+function handlePointerUp() { pointerDown = false; }
+function handlePointerDown(e) {
+    if (e.target.classList.contains('pixel')) {
+        e.target.style.backgroundColor = currentColor; 
+    }
+    pointerDown = true;
+}
 
 function handleMouseEnter(e) {
-    e.target.style.backgroundColor = "rgb(32,32,32)";
+    if (pointerDown) {
+        e.target.style.backgroundColor = currentColor;
+    }
 }
 
 
