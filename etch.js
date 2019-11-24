@@ -28,16 +28,17 @@ function setGridLayout(divsPerSide) {
 }
 
 function toggleGrid() {
-//function setGridLines(isVisible) {
 
     let pixels = document.querySelectorAll('.pixel');
     pixels.forEach( (pix) => {
-        if (pix.style.border == "hidden") {
-            pix.style.border = "1px dotted rgb(179, 179, 179)";
-        }
-        else {
-            pix.style.border = "hidden";
-        }
+        pix.classList.toggle('drawGrid');
+
+        // if (pix.style.border == "hidden") {
+        //     pix.style.border = "1px dotted rgb(179, 179, 179)";
+        // }
+        // else {
+        //     pix.style.border = "hidden";
+        // }
     });
 }
 
@@ -80,7 +81,6 @@ function handlePaletteClick(e) {
 
 function handlePointerUp() { pointer1Down = false; pointer2Down = false; }
 function handlePointerDown(e) {
-    let pointerButton = e.button;
 
     if (e.button == 0) {
         pointer1Down = true;

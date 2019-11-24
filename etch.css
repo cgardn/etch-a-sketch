@@ -59,6 +59,9 @@
     grid-area: pad;
     display: grid;
     margin: 0 auto;
+    margin-top: 5%;
+    height: 600px;
+    width: 600px;
 }
 
 #bottomMiddle {
