@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.testBorder {
+    border: 1px solid black;
+}
+
+#page {
+    display:grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-areas:
+        ". topMid ."
+        ". pad ."
+        ". botMid ."
+}
+
+#topMiddle {
+    grid-area: topMid;
+}
+
+#etchPad {
+    grid-area: pad;
+    display: grid;
+    margin: 0 auto;
+}
+
+#bottomMiddle {
+    grid-area: botMid;
+}
