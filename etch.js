@@ -1,11 +1,19 @@
 let etchPad = document.querySelector('#etchPad');
-let currentColor = "#000000";
-let pointerDown = false;
+let currentColor1 = "#000000";
+let currentColor2 = "red";
+let pointer1Down = false;
+let pointer2Down = false;
 
 document.querySelector('#resetButton').addEventListener('click', handleReset);
 document.querySelector('#clearButton').addEventListener('click', clearBoard);
 window.addEventListener('pointerdown', handlePointerDown);
 window.addEventListener('pointerup', handlePointerUp);
+
+let colorBtns = document.querySelectorAll('.colorButton');
+for (let i=0; i<colorBtns.length; i++) {
+    colorBtns[i].addEventListener('click', handlePaletteClick);
+    colorBtns[i].style.backgroundColor = colorBtns[i].getAttribute('data-color');
+}
 
 function setGridLayout(divsPerSide) {
 
@@ -23,7 +31,6 @@ function clearBoard() {
 }
 
 function deleteBoard() {
-    //test 123
     let pixels = document.querySelectorAll('.pixel');
     for (let i=0; i<pixels.length; i++) {
         pixels[i].remove();
@@ -40,25 +47,40 @@ function createBoard(sideCount) {
         document.querySelector('#etchPad').appendChild(thisDiv);
     }
 }
-// on pointer down, paint target pixel
-// set flag for pointer down/remove for pointer up
-// check on pointer enter if pointerdown-flag is true, paint if so
-// 
 
-function handlePointerUp() { pointerDown = false; }
-function handlePointerDown(e) {
-    if (e.target.classList.contains('pixel')) {
-        e.target.style.backgroundColor = currentColor; 
+function handlePaletteClick(e) {
+    if (e.button == 0) {
+        currentColor1 = e.target.getAttribute('data-color');
+    } else if (e.button == 2) {
+        currentColor2 = e.target.getAttribute('data-color');
     }
-    pointerDown = true;
+}
+
+function handlePointerUp() { pointer1Down = false; pointer2Down = false; }
+function handlePointerDown(e) {
+    let pointerButton = e.button;
+
+    if (e.button == 0) {
+        pointer1Down = true;
+        if (e.target.classList.contains('pixel')) {
+            e.target.style.backgroundColor = currentColor1;
+        }
+    } else if (e.button == 2) {
+        pointer2Down = true;
+        if (e.target.classList.contains('pixel')) {
+            e.target.style.backgroundColor = currentColor2;
+        }
+    }
 }
 
 function handleMouseEnter(e) {
-    if (pointerDown) {
-        e.target.style.backgroundColor = currentColor;
+    if (pointer1Down) {
+        e.target.style.backgroundColor = currentColor1;
+    }
+    if (pointer2Down) {
+        e.target.style.backgroundColor = currentColor2;
     }
 }
-
 
 function handleReset(e) {
     deleteBoard();
@@ -66,11 +88,6 @@ function handleReset(e) {
     if (!newCount) {newCount = 16;}
     setGridLayout(newCount);
     createBoard(newCount);
-
-    //let divArray = Array.from(document.querySelectorAll('.pixel'))
-
-    //divArray.forEach = (div) => {div.style.backgroundColor = '#ffffff';};
-    //document.querySelectorAll('.pixel').style.backgroundColor = '#ffffff';
 }
 
 setGridLayout(16);
