@@ -83,9 +83,9 @@ function handleMouseEnter(e) {
 }
 
 function handleReset(e) {
-    deleteBoard();
     let newCount = prompt('How many pixels on a side for new board?');
-    if (!newCount) {newCount = 16;}
+    if (!newCount) {return;}
+    deleteBoard();
     setGridLayout(newCount);
     createBoard(newCount);
 }
